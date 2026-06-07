@@ -7,20 +7,54 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#007bff">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-        iframe { border: none; width: 100%; height: 100%; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px 20px; 
+            background-color: #f8f9fa;
+        }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- هنا يتم عرض موقعك الخاص بجوجل سايت -->
-    <iframe src="https://sites.google.com/view/haroun-vet-medecine" allowfullscreen></iframe>
+    <h2>جاري الانتقال إلى هارون للطب البيطري...</h2>
+    <div class="loader"></div>
+    <a href="https://sites.google.com/view/haroun-vet-medecine" class="btn">اضغط هنا إذا لم يتم تحويلك تلقائياً</a>
 
     <script>
+        // تسجيل الـ Service Worker لضمان ظهور زر التثبيت كتطبيق PWA
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
             .then(() => console.log('Service Worker Registered'));
         }
+
+        // تحويل الزائر فوراً وبشكل تلقائي إلى موقع جوجل سايت الخاص بك
+        setTimeout(function() {
+            window.location.href = "https://sites.google.com/view/haroun-vet-medecine";
+        }, 1500); // سينتظر ثانية ونصف ليسمح للموبايل بالتقاط الـ PWA ثم يحول الزائر
     </script>
 </body>
 </html>
